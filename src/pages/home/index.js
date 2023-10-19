@@ -5,20 +5,24 @@ import Logo from "../../assets/logo.png";
 import { ModalPassword } from "../../components/modal";
 
 export function Home() {
-  
+    // CRIA O ESTADO DO SLIDER (TROCA O VALOR DOS CARACTERES) 
     const [size, setSize] = useState(10);
+    // CRIA O ESTADO DO PASSWORD (SALVA SENHA)
     const [passwordValue, setPasswordValue] = useState("");
+    // CRIA O ESTADO DO MODAL (FALA QUANDO ELE DEVE APARECER OU NÃO (INICIA COMO FALSE))
     const [modalVisible, setModalVisible] = useState(false);
-
+    
+    // FUNÇÃO PARA GERAR A SENHA
     function generatePassword() {
         let charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let password = '';
-
+        // FAZ O LOOP PARA GERAR A SENHA ALEATORIAMENTE
         for(let i = 0, n = charset.length; i < size; i++) {
             password += charset.charAt(Math.floor(Math.random() * n));
         }
-
+        // SALVA A SENHA DENTRO DO useState
         setPasswordValue(password);
+        // PASSA O useState PARA ABRIR O MODAL
         setModalVisible(true);
     }
 
@@ -28,6 +32,7 @@ export function Home() {
 
             <Text style={styles.title}>{size} Caracteres</Text>
 
+            {/* SLIDER PARA DEFENIR A QUANTIDADE DE CARACTERES */}
             <View style={styles.area}>
                 <Slider 
                     style={{heigth: 50}} 
@@ -42,6 +47,7 @@ export function Home() {
                 <Text style={styles.buttonText}>Gerar senha</Text>
             </TouchableOpacity>
 
+            {/* MODAL QUE IRÁ APARECER A SENHA SALVA (SÓ IRÁ ABRIR QUANDO GERAR A SENHA) */}
             <Modal visible={modalVisible} animationType="fade" transparent={true}>
                 <ModalPassword password={passwordValue} handleClouse={() => setModalVisible(false)} />
             </Modal>
