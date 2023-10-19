@@ -3,6 +3,7 @@ import { StyleSheet, Text, Pressable } from "react-native";
 
 export function PasswordItem({data, removePassword}) {
     return (
+        // DELETA A SENHA DA LISTA
         <Pressable onLongPress={removePassword} style={styles.container}>
             <Text style={styles.text}>{data}</Text>
         </Pressable>

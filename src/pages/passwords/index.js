@@ -10,20 +10,27 @@ export function Passwords() {
     const [listPaswords, setListPasswords] = useState([]);
 
     const focused = useIsFocused();
+    
     // CRIA UM ARMAZENAMENTO LOCAL (PEGA AS SENHAS SALVAS (getItem) E REMOVE AS SENHAS (removeItem))
     const { getItem, removeItem } = useStorage();
-
+    
+    // BUSCA A LISTA COM AS SENHAS 
     useEffect(() => {
         async function loadPasswords(){
+            // PEGA A SENHA SALVA
             const passwords = await getItem("@pass");
+            // SALVA NO useState
             setListPasswords(passwords);
         }
 
         loadPasswords();
     }, [focused]);
     
+    // FUNÇÃO PARA REMOVER AS SENHAS
     async function handleDeletePassword(item) {
+        // REMOVE A SENHA E SALVA NA CONSTANTE
         const passwords = await removeItem("@pass", item);
+        // ATUALIZA A LISTA
         setListPasswords(passwords);
     }
 
@@ -33,6 +40,7 @@ export function Passwords() {
                 <Text style={styles.title}>Minhas senhas</Text>
             </View>
             <View style={styles.content}>
+                {/* LISTA AS SENHAS EM TELA */}
                 <FlatList
                     style={{ flex: 1, paddingTop: 14 }}
                     data={listPaswords}
