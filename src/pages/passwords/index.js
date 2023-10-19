@@ -6,11 +6,11 @@ import useStorage from "../../hooks/useStorage";
 import { PasswordItem } from '../passwords/components/passwordItem';
 
 export function Passwords() {
-    
+    // CRIA O ESTADO PARA LISTAR AS SENHAS (ARRAY)
     const [listPaswords, setListPasswords] = useState([]);
 
     const focused = useIsFocused();
-
+    // CRIA UM ARMAZENAMENTO LOCAL (PEGA AS SENHAS SALVAS (getItem) E REMOVE AS SENHAS (removeItem))
     const { getItem, removeItem } = useStorage();
 
     useEffect(() => {

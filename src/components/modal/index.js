@@ -3,14 +3,14 @@ import * as Clipboard from 'expo-clipboard';
 import useStorage from "../../hooks/useStorage";
 
 export function ModalPassword({password, handleClouse}) {
-    // CRIA UM ARMAZENAMENTO LOCAL
+    // CRIA UM ARMAZENAMENTO LOCAL (SALVA A SENHA GERADA NO AsyncStorage)
     const { saveItem } = useStorage();
     
     // FUNÇÃO ASSÍNCRONA PARA SALVAR A SENHA
     async function handleCopyPassword() {
         // SALVA A SENHA NO CTRL C
         await Clipboard.setStringAsync(password);
-        // 
+        // SALVA NO AsyncStorage || @pass = KEY
         await saveItem("@pass", password);
         alert('Senha salva!');
         // FECHA O MODAL
